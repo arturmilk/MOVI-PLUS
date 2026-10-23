@@ -1,0 +1,10 @@
+[Unit]
+Description=Monitoramento periódico local do Clube do Motorista V5
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=15min
+AccuracySec=1min
+Persistent=true
+Unit=novagente-clube-motorista-v5-health.service
+[Install]
+WantedBy=timers.target

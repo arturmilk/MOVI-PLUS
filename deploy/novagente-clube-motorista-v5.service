@@ -1,0 +1,24 @@
+[Unit]
+Description=NOVAGENTE Clube do Motorista V5 - Gestão interna (sem Pix ou WhatsApp)
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=simple
+User=sentinelx
+Group=sentinelx
+WorkingDirectory=/srv/clube-motorista-v3/financeiro-secure-v5
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=CLUBE_DATA=/srv/clube-motorista-v3/financeiro-secure-v5/data
+Environment=CLUBE_ENABLE_SENSITIVE=0
+ExecStart=/srv/clube-motorista-v3/financeiro-secure-v5/.venv/bin/python -m uvicorn app:app --host 127.0.0.1 --port 8891 --workers 1 --proxy-headers --forwarded-allow-ips 127.0.0.1
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/srv/clube-motorista-v3/financeiro-secure-v5/data
+UMask=0077
+LimitNOFILE=8192
+[Install]
+WantedBy=multi-user.target

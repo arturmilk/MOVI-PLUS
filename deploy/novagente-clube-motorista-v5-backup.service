@@ -1,0 +1,16 @@
+[Unit]
+Description=NOVAGENTE Clube do Motorista V5 - Backup diario protegido
+After=novagente-clube-motorista-v5.service
+[Service]
+Type=oneshot
+User=sentinelx
+Group=sentinelx
+WorkingDirectory=/srv/clube-motorista-v3/financeiro-secure-v5
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/srv/clube-motorista-v3/financeiro-secure-v5/.venv/bin/python backup.py
+NoNewPrivileges=true
+PrivateTmp=true
+UMask=0077
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/srv/clube-motorista-v3/financeiro-secure-v5/backups

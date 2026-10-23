@@ -1,0 +1,19 @@
+[Unit]
+Description=NOVAGENTE Clube Motorista signed WAHA webhook bridge (docker0 only)
+After=network-online.target novagente-clube-motorista-v5.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=sentinelx
+Group=sentinelx
+ExecStart=/usr/bin/socat -lf /dev/null TCP-LISTEN:8892,bind=172.17.0.1,reuseaddr,fork TCP:127.0.0.1:8891
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
